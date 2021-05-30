@@ -7,7 +7,7 @@
               Add ToDo
             </mat-panel-title>
             <mat-panel-description>
-              Click here to {{panelOpenState ? 'open' : 'close'}}
+              Click here to {{!panelOpenState ? 'open' : 'close'}}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <form (ngSubmit)="onSubmit()" [formGroup]="form">
@@ -26,8 +26,10 @@
                   <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
                   <!-- <mat-datepicker #picker></mat-datepicker> -->
               </mat-form-field>
-              <button mat-flat-button color="primary">Add</button> 
+              <button *ngIf="toDoService.selectedToDo" mat-flat-button color="primary">Add</button>
           </form>
         </mat-expansion-panel>
       </mat-accordion>
 </div>
+<app-todo-list [getAll]="getAll" [fetchedData]="fetchedData" [selectedData]="selectedData" [form]="form"></app-todo-list>
+

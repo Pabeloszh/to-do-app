@@ -1,0 +1,22 @@
+<ng-container *ngFor = "let todo of fetchedData">
+    <mat-card>
+      <div>
+        <mat-checkbox class="example-margin" [(ngModel)]="todo.done" (change)="isDone(todo)"></mat-checkbox>
+        <div>
+            <div class="title">
+                <h4>{{todo.title}}</h4>
+                <span>{{todo.whenToDo.substr(0, 10)}}</span>
+            </div>
+            <p>{{todo.desc}}</p>
+        </div>
+      </div>
+      <div>
+        <button mat-icon-button color="accent" aria-label="Example icon button with a bookmark icon" (click)="onEdit(todo)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" aria-label="Example icon button with a bookmark icon" (click)="onDelete(todo._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+</ng-container>
