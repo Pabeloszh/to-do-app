@@ -1,0 +1,59 @@
+.mat-card {
+  margin: 5px auto;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > div {
+    display: flex;
+    align-items: center;
+    .mat-checkbox {
+      margin-right: 20px;
+    }
+    .title {
+      display: flex;
+      align-items: flex-end;
+
+      margin-bottom: 5px;
+      h4 {
+        margin-right: 15px;
+      }
+      span {
+        font-size: 12px;
+      }
+    }
+    p{
+      font-size: 14px;
+      // overflow: hidden;
+      // white-space: nowrap;
+      // text-overflow: ellipsis;
+    }
+  }
+}
+.mat-card:last-child{
+  margin-bottom:15px;
+}
+
+@media only screen and (max-width:600px){
+  .mat-card {
+    > div {
+      .title {
+        align-items: flex-start;
+        flex-direction: column-reverse;  
+        margin-bottom: 5px;
+        h4 {
+          font-size:14px;
+          margin-right: 0;
+        }
+        span {
+          font-size: 10px;
+          margin-bottom: 2px;
+        }
+      }
+      p{
+        font-size: 12px;
+      }
+    }
+  }
+}

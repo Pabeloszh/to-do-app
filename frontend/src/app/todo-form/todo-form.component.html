@@ -1,20 +1,35 @@
 <div class="accordion">
     <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
+        <mat-expansion-panel [expanded]="panelOpenState === true" >
+          <mat-expansion-panel-header (click)="closePanel(!panelOpenState)">
             <mat-panel-title>
-              Add ToDo
+              {{toDoService.selectedToDo ? 'Edit' : 'Add'}} ToDo
             </mat-panel-title>
             <mat-panel-description>
-              Click here to {{panelOpenState ? 'open' : 'close'}}
+              Click here to {{!panelOpenState ? 'open' : 'close'}}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <form (ngSubmit)="onSubmit()" [formGroup]="form">
+          <form *ngIf="!toDoService.selectedToDo" (ngSubmit)="onSubmit()" [formGroup]="form">
+            <input type="hidden" formControllName="_id"/>
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput type="email" formControlName="title" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput type="text" formControlName="desc"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput type="date" formControlName="whenToDo" />
+            </mat-form-field>
+            <button mat-flat-button color="primary">Add</button>
+          </form>
+          <form *ngIf="toDoService.selectedToDo" (ngSubmit)="onEdit()" [formGroup]="form">
                 <input type="hidden" formControllName="_id"/>
                 <mat-form-field>
                     <mat-label>Title</mat-label>
-                    <input matInput type="email" formControlName="title" />
+                    <input matInput type="text" formControlName="title" />
                 </mat-form-field>
               <mat-form-field>
                   <mat-label>Description</mat-label>
@@ -26,8 +41,11 @@
                   <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
                   <!-- <mat-datepicker #picker></mat-datepicker> -->
               </mat-form-field>
-              <button mat-flat-button color="primary">Add</button> 
-          </form>
+              <button mat-flat-button color="primary">Edit</button>
+            </form>
+            <button class="cancel" *ngIf="toDoService.selectedToDo" mat-flat-button color="secondary" (click)="onCancel()">Cancel</button>
         </mat-expansion-panel>
       </mat-accordion>
 </div>
+<app-todo-list [getAll]="getAll" [fetchedData]="fetchedData" [form]="form" (editedEmitter)="closePanel($event)"></app-todo-list>
+

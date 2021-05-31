@@ -6,23 +6,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import { TodoListComponent } from './todo-list/todo-list.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule} from '@angular/material/checkbox';
+import { TodoListComponent } from './todo-form/todo-list/todo-list.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoFormComponent,
-    TodoListComponent
+    TodoListComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

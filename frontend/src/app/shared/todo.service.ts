@@ -9,7 +9,7 @@ import { ToDo } from './todo.model';
   providedIn: 'root'
 })
 export class TodoService {
-  selectedToDo: ToDo;
+  selectedToDo: ToDo | undefined;
   toDos: ToDo[];
 
   constructor(private httpClient: HttpClient) { }
@@ -19,5 +19,15 @@ export class TodoService {
   }
   postData(data: ToDo){
     return this.httpClient.post('http://localhost:5000/todo', data)
+  }
+  putDone(data: ToDo){
+    return this.httpClient.put(`http://localhost:5000/todo/${data._id}`, data)
+  }
+  putData(data: ToDo){
+    console.log(data._id?.toString());
+    return this.httpClient.put(`http://localhost:5000/todo/${data._id}`, data)
+  }
+  deleteData(id: string){
+    return this.httpClient.delete(`http://localhost:5000/todo/${id}`)
   }
 }
