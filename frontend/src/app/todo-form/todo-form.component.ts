@@ -6,6 +6,7 @@ import { Input } from '@angular/core';
 
 import { TodoService } from "../shared/todo.service";
 import { ToDo } from '../shared/todo.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 // import { ToDo } from "../../shared/todo.model";
 
 @Component({
@@ -21,6 +22,7 @@ export class TodoFormComponent implements OnInit {
   // fetchedData: any;
   data: any;
   form: FormGroup;
+  editForm: FormGroup;
   selectedData: {
       _id: "",
       title: "",
@@ -28,11 +30,22 @@ export class TodoFormComponent implements OnInit {
       whenToDo: "",
       done: boolean
   };
-  constructor(public toDoService: TodoService, public formBuilder: FormBuilder) { }
+  variableToUpdate = 0;
+  constructor(public toDoService: TodoService, public formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
   fetchedData: any;
+
+  closePanel(val: boolean) {
+    this.panelOpenState = val;
+  }
+
+  // closePanel(){
+  //   this.panelOpenState = true;
+  //   console.log(this.panelOpenState)
+  // }
+
   createForm(){
     this.form = this.formBuilder.group({
-      id: [''],
+      _id: [''],
       title: ['', Validators.required],
       desc: ['', Validators.required],
       whenToDo: ['', Validators.required],
@@ -42,7 +55,6 @@ export class TodoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    // this.resetForm();
     this.getAll();
   }
 
@@ -53,19 +65,56 @@ export class TodoFormComponent implements OnInit {
     })
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onCancel(){
+    this.form.reset();
+    this.toDoService.selectedToDo = undefined;
+    this._snackBar.open('Editing canceled...', 'Ok', {
+      duration: 3000
+    });
+  }
 
+  onEdit(){
+    this.submitted = true;
+    
     if(this.form.invalid){
-      console.log(this.form.value)
+      this._snackBar.open('Wrong data...', 'Ok', {
+        duration: 3000
+      });
       return;
     }
-    console.log(this.form.value);
+    this.closePanel(false);
+
+    this.toDoService.putData(this.form.value).subscribe(res => {
+      this.data = res;
+      this.getAll();
+    })
+    this.toDoService.selectedToDo = undefined;
+    console.log(this.toDoService.selectedToDo);
+    this.form.reset();
+    this._snackBar.open('ToDo edited...', 'Ok', {
+      duration: 3000
+    });
+
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    
+    if(this.form.invalid){
+      this._snackBar.open('Wrong data...', 'Ok', {
+        duration: 3000
+      });
+      return;
+    }
+    this.closePanel(false);
 
     this.toDoService.postData(this.form.value).subscribe(res => {
       this.data = res;
       this.getAll();
     })
     this.form.reset();
+    this._snackBar.open('ToDo added...', 'Ok', {
+      duration: 3000
+    });
   }
 }

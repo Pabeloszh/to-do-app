@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { TodoListComponent } from './todo-form/todo-list/todo-list.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

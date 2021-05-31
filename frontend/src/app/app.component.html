@@ -1,16 +1,24 @@
 <p>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button class="example-icon" (click)="openSnackBar()">
       <mat-icon>menu</mat-icon>
     </button>
     <span>ToDo App</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    <a href="https://github.com/Pabeloszh" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <i class="fab fa-github"></i>
+    </a>
   </mat-toolbar>
 </p>
-<app-todo-form></app-todo-form>
+<div class="content">
+  <app-todo-form></app-todo-form>
+</div>
+<div class="footer">
+    <div class="container">
+        <h4>About app:</h4>
+        <p>Simple MEAN stac CRUD app made as an task for college. Angular + Angular Material with SCSS for frontend. Node, Express and MongoDB Atlas for backend. Hosted on heroku.</p>
+    </div>
+    <div class="made-by">
+      <span>Made by Paweł Mielech</span>
+    </div>
+</div>

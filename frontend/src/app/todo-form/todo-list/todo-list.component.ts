@@ -1,5 +1,6 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Input } from '@angular/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TodoService } from '../../shared/todo.service';
 
 @Component({
@@ -8,33 +9,31 @@ import { TodoService } from '../../shared/todo.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-  @Input() fetchedData: any;
   @Input() getAll: any;
-  @Input() selectedData: any;
+  @Input() fetchedData: any;
   @Input() form:any;
+  @Output() editedEmitter = new EventEmitter<boolean>();
   data: any;
 
+  constructor(public toDoService: TodoService, private _snackBar: MatSnackBar) { }
 
-  constructor(public toDoService: TodoService) { }
+
+  closePanel() {
+    this.editedEmitter.emit(true);
+  }
 
   ngOnInit(): void {
   }
 
   onEdit(data: any){
+    this.closePanel();
     this.form.patchValue({
-      id: data._id,
+      _id: data._id,
       title: data.title,
       desc: data.desc,
       whenToDo: data.whenToDo.substr(0, 10)
     })
     this.toDoService.selectedToDo = data;
-    console.log(this.toDoService.selectedToDo)
-    // this.toDoService.putData(data._id, this.form.value).subscribe(res => {
-    //   this.data = res;
-    //   this.getAll();
-    // })
-    // this.form.reset();
-
   }
 
   isDone(data: any){
@@ -46,6 +45,10 @@ export class TodoListComponent implements OnInit {
   onDelete(id: string){
     this.toDoService.deleteData(id).subscribe((res) =>  {
       this.getAll();
+      this.toDoService.selectedToDo = undefined;
+      this._snackBar.open('ToDo deleted...', 'Ok', {
+        duration: 3000
+      });
     });
   }
 

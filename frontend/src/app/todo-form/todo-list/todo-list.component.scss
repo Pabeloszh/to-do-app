@@ -23,5 +23,37 @@
         font-size: 12px;
       }
     }
+    p{
+      font-size: 14px;
+      // overflow: hidden;
+      // white-space: nowrap;
+      // text-overflow: ellipsis;
+    }
+  }
+}
+.mat-card:last-child{
+  margin-bottom:15px;
+}
+
+@media only screen and (max-width:600px){
+  .mat-card {
+    > div {
+      .title {
+        align-items: flex-start;
+        flex-direction: column-reverse;  
+        margin-bottom: 5px;
+        h4 {
+          font-size:14px;
+          margin-right: 0;
+        }
+        span {
+          font-size: 10px;
+          margin-bottom: 2px;
+        }
+      }
+      p{
+        font-size: 12px;
+      }
+    }
   }
 }
