@@ -3,10 +3,15 @@ const connectDB = require("./config/db");
 require("dotenv").config();
 const cors = require("cors");
 
+const PORT = process.env.PORT || 5000;
 const app = express();
 const todoController = require("./controllers/todoControllers");
 
 connectDB();
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('frontend/build'))
+}
 
 app.use(express.json({ extended: false }));
 app.use(
@@ -19,7 +24,6 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 

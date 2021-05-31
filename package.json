@@ -1,19 +1,24 @@
 {
-  "name": "backend",
+  "name": "todoapp",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./backend/server.js",
   "scripts": {
-    "start": "node /backend/server.js",
-    "server": "nodemon /backend/server.js"
+    "build": "cd frontend && ng build",
+    "install-frontend": "cd frontend && npm install",
+    "install-backend": "cd backend && npm install",
+    "heroku-postbuild": "npm run build && npm run install-frontend",
+    "start": "cd backend && npm run start",
+    "frontend": "cd frontend && ng serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pabeloszh/ToDoApp.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.12.11",
-    "nodemon": "^2.0.7"
-  }
+  "bugs": {
+    "url": "https://github.com/Pabeloszh/ToDoApp/issues"
+  },
+  "homepage": "https://github.com/Pabeloszh/ToDoApp#readme"
 }
