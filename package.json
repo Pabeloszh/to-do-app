@@ -4,8 +4,8 @@
   "description": "",
   "main": "./backend/server.js",
   "scripts": {
-    "build": "cd frontend && ng build",
     "install-frontend": "cd frontend && npm install",
+    "build": "cd frontend && ng build",
     "install-backend": "cd backend && npm install",
     "heroku-postbuild": "npm run build && npm run install-frontend",
     "start": "cd backend && npm run start",
